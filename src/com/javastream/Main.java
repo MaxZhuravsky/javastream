@@ -77,7 +77,7 @@ public class Main {
                 .forEachRemaining(System.out::println);
         }
 
-        public static class Node implements Comparable {
+        public static class Node {
 
             private int data;
             private Node next;
@@ -112,15 +112,6 @@ public class Main {
 
             public void setNext(Node next) {
                 this.next = next;
-            }
-
-            @Override
-            public int compareTo(Object o1) {
-                if (o1 == this.next) {
-                    return 1;
-                } else {
-                    return 0;
-                }
             }
 
             @Override
