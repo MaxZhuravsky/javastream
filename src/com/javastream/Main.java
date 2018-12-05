@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        System.out.println("Hello");
 
         MyLinkList l = new MyLinkList();
         l.add(1);
@@ -22,6 +22,7 @@ public class Main {
         System.out.println("Reverse order: ");
         l.reverse();
         l.printLinkList();
+        System.out.println("Stream reverse: ");
         l.reverseStream();
 
 
@@ -73,7 +74,6 @@ public class Main {
                 temp = temp.next;
             }
 
-            System.out.println("Stream reverse: ");
             streamList.stream()
                 .collect(Collectors.toCollection(ArrayDeque::new))
                 .descendingIterator()
