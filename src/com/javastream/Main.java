@@ -13,7 +13,13 @@ public class Main {
         l.add(2);
         l.add(3);
         l.add(4);
+        System.out.println("Link list is: ");
         l.printLinkList();
+        System.out.println("Reverse order: ");
+        l.reverse();
+        l.printLinkList();
+
+
 
     }
 
@@ -34,6 +40,21 @@ public class Main {
                System.out.println(temp.data);
                temp = temp.next;
            }
+        }
+
+        public void reverse() {
+            Node current = head;
+            Node prev = null;
+            Node next = null;
+
+            while (current != null) {
+                next = current.next;
+                current.next = prev;
+                prev = current;
+                current = next;
+            }
+
+            head = prev;
         }
 
         public static class Node {
