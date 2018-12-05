@@ -1,14 +1,18 @@
 package com.javastream;
 
-import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
 
-        LinkList l = new LinkList();
+        MyLinkList l = new MyLinkList();
         l.add(1);
         l.add(2);
         l.add(3);
@@ -18,12 +22,12 @@ public class Main {
         System.out.println("Reverse order: ");
         l.reverse();
         l.printLinkList();
-
+        l.reverseStream();
 
 
     }
 
-    public static class LinkList {
+    public static class MyLinkList {
 
         Node head;
 
@@ -33,13 +37,14 @@ public class Main {
             temp.next = head;
             head = temp;
         }
+
         public void printLinkList() {
             Node temp = head;
 
-           while(temp != null) {
-               System.out.println(temp.data);
-               temp = temp.next;
-           }
+            while (temp != null) {
+                System.out.println(temp.data);
+                temp = temp.next;
+            }
         }
 
         public void reverse() {
@@ -57,7 +62,25 @@ public class Main {
             head = prev;
         }
 
-        public static class Node {
+        public void reverseStream() {
+            LinkedList<Node> streamList = new LinkedList();
+            Node temp = head;
+
+
+            while (temp != null) {
+                streamList.add(temp);
+
+                temp = temp.next;
+            }
+
+            System.out.println("Stream reverse: ");
+            streamList.stream()
+                .collect(Collectors.toCollection(ArrayDeque::new))
+                .descendingIterator()
+                .forEachRemaining(System.out::println);
+        }
+
+        public static class Node implements Comparable {
 
             private int data;
             private Node next;
@@ -92,6 +115,20 @@ public class Main {
 
             public void setNext(Node next) {
                 this.next = next;
+            }
+
+            @Override
+            public int compareTo(Object o1) {
+                if (o1 == this.next) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+
+            @Override
+            public String toString() {
+                return String.valueOf(data);
             }
         }
     }
